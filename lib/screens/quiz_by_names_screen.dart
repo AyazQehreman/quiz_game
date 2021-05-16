@@ -7,14 +7,14 @@ import 'package:quiz_app/utils/constants.dart';
 import 'package:quiz_app/utils/utility.dart';
 import 'congratulations_screen.dart';
 
-class QuizScreen extends StatefulWidget {
+class QuizByNamesScreen extends StatefulWidget {
   @override
-  _QuizScreenState createState() => _QuizScreenState();
+  _QuizByNamesScreenState createState() => _QuizByNamesScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> {
+class _QuizByNamesScreenState extends State<QuizByNamesScreen> {
   List<String> imagesList = Constants.imagesList;
-  List<String> soundList = Constants.soundList;
+ // List<String> soundList = Constants.soundList;
 
   List<String> images = ['', '', '', ''];
 
@@ -45,8 +45,17 @@ class _QuizScreenState extends State<QuizScreen> {
     return WillPopScope(
       // ignore: missing_return
       onWillPop: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        Utility.exitDialog(
+          context,
+          message: 'Are you sure?',
+          okFunction: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(),
+            ),
+          ),
+          chancelFunction: () => Navigator.pop(context),
+        );
       },
       child: Scaffold(
         backgroundColor: Theme.of(context).accentColor,
@@ -228,12 +237,12 @@ class _QuizScreenState extends State<QuizScreen> {
     answer1 = answer2 = answer3 = answer4 = true;
 
     for (int i = 0; i < 4; i++) {
-      number = Utility.getRandomNumber();
-      images[i] = imagesList[number];
+      number = Utility.getRandomNumber('Quiz By Names Screen ',
+          Constants.imagesList.length); // Getting 4 different numbers
+      images[i] = imagesList[number]; // Getting images from 4 different numbers
     }
 
     print('*********** ' + Constants.numbers.toString());
-    print('*********** ' + Constants.allNumbers.toString());
 
     setState(() {
       // Getting one of 4 images as a correct answer
@@ -249,12 +258,11 @@ class _QuizScreenState extends State<QuizScreen> {
     //Check tapped images path to path of correct answer
     if (images[randomImage] == answer) {
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => CongratulationsScreen()));
+          MaterialPageRoute(builder: (context) => CongratulationsScreen(pageNumber: 2,)));
       return true;
     } else {
       //Playing audio of wrong answer
-      Utility.playAudio('assets/sounds/wrong_answer.wav');
-
+      Utility.playAudio('assets/sounds/wrong_answer.wav', true);
 
       //Minus the live if answer is incorrect
       subtractALife();
@@ -267,7 +275,6 @@ class _QuizScreenState extends State<QuizScreen> {
       return false;
     }
   }
-
 
   //Minus the live if answer is incorrect
   void subtractALife() {
@@ -290,13 +297,9 @@ class _QuizScreenState extends State<QuizScreen> {
 
       Timer.periodic(Duration(seconds: 1), (timer) {
         setState(() {
-          opacity =  1.0;
+          opacity = 1.0;
         });
       });
-
-
-
-
     }
   }
 }
