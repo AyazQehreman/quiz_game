@@ -1,3 +1,6 @@
+
+import 'package:flutter/material.dart';
+
 class Constants
 {
 
@@ -7,8 +10,11 @@ class Constants
   static int highScore = 0;
   static int mistakes = 0;
   static int correctAnswerStreak = 0;
+  static List numbers = [100, 100, 100, 100, 100, 100, 100, 100];
 
- static List<String> imagesList = [
+
+
+  static List<String> imagesList = [
     'assets/images/bear.png',
     'assets/images/cat.png',
     'assets/images/cock.png',
@@ -50,8 +56,35 @@ class Constants
     'assets/sounds/zebra.mp3',
   ];
 
-  static List numbers = [100, 100, 100, 100, 100, 100, 100, 100];
-  static List allNumbers = [];
+  static List colorsList = [
+    Colors.blueAccent,
+    Colors.lightBlueAccent,
+    Colors.deepPurpleAccent,
+    Colors.purple,
+    Colors.pink,
+    Colors.pinkAccent,
+    Colors.purpleAccent,
+    Colors.red,
+    Colors.brown,
+    Colors.grey,
+    Colors.green,
+    Colors.blue,
+    Colors.purple,
+    Colors.orange,
+    Colors.lime,
+    Colors.limeAccent,
+    Colors.lightGreen,
+    Colors.cyan,
+  ];
+
+  static List gifsList = [
+    'assets/gifs/bear_dancing.gif'
+        'assets/gifs/bear_playing_guitar.gif'
+        'assets/gifs/giraffe_head.gif'
+        'assets/gifs/music.gif'
+        'assets/gifs/question.gif'
+  ];
+
 
 
 }
